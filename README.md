@@ -12,7 +12,7 @@ Cliente
    ▼
 ┌─────────────────────────────┐
 │         BFF (porta 8085)    │  ◄── Autenticação JWT (Spring Security)
-│     bgg-agendador-tarefas   │  ◄── Roteamento via OpenFeign
+│     bff-agendador-tarefas   │  ◄── Roteamento via OpenFeign
 │                             │  ◄── Cron de notificações automáticas
 └──────┬───────────┬──────────┘
        │           │           │
@@ -121,7 +121,7 @@ Cron (BFF)
 ### 1. Clone todos os repositórios
 
 ```bash
-git clone https://github.com/RafaGregorio/bgg-agendador-tarefas   # BFF
+git clone https://github.com/RafaGregorio/bff-agendador-tarefas   # BFF
 git clone https://github.com/RafaGregorio/cadatro_usuario
 git clone https://github.com/RafaGregorio/agendador-tarefas
 git clone https://github.com/RafaGregorio/notificacao
@@ -136,9 +136,9 @@ Crie um arquivo `.env` na raiz do BFF com as seguintes variáveis:
 JWT_SECRET=seu_secret_aqui
 
 # URLs dos microsserviços
-USUARIO_SERVICE_URL=http://usuario:8082
-TAREFAS_SERVICE_URL=http://agendador-tarefas:8083
-NOTIFICACAO_SERVICE_URL=http://notificacao:8084
+usuario.url=http://usuario:8082
+agendador-tarefas.url=http://agendador-tarefas:8083
+notificacao.url=http://notificacao:8084
 
 # E-mail (para o serviço de notificação)
 MAIL_HOST=smtp.gmail.com
@@ -150,7 +150,7 @@ MAIL_PASSWORD=sua_senha_de_app
 ### 3. Suba toda a stack com Docker Compose
 
 ```bash
-cd bgg-agendador-tarefas
+cd bff-agendador-tarefas
 docker compose up --build
 ```
 
