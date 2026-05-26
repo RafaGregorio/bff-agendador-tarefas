@@ -1,4 +1,4 @@
-# 📋 BGG Agendador de Tarefas — BFF
+# 📋 BFF Agendador de Tarefas — BFF
 
 BFF (Backend for Frontend) do sistema de agendamento de tarefas. Atua como ponto central de entrada da aplicação, roteando e orquestrando as requisições para os microsserviços de **Usuário**, **Agendador de Tarefas** e **Notificação**.
 
