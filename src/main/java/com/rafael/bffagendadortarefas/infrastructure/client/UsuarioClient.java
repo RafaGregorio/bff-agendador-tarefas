@@ -7,6 +7,7 @@ import com.rafael.bffagendadortarefas.business.dto.in.UsuarioDTORequest;
 import com.rafael.bffagendadortarefas.business.dto.out.EnderecoDTOResponse;
 import com.rafael.bffagendadortarefas.business.dto.out.TelefoneDTOResponse;
 import com.rafael.bffagendadortarefas.business.dto.out.UsuarioDTOResponse;
+import com.rafael.bffagendadortarefas.business.dto.out.ViaCepDTOResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,4 +53,9 @@ public interface UsuarioClient {
     @DeleteMapping("/{email}")
     void deletaUsuarioPorEmail(@PathVariable String email,
                                @RequestHeader("Authorization")  String token);
+
+    // ViaCep Method
+    @GetMapping("/endereco/{cep}")
+    ViaCepDTOResponse buscarDadosCep(@PathVariable("cep") String cep);
+
 }

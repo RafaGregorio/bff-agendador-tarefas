@@ -7,6 +7,7 @@ import com.rafael.bffagendadortarefas.business.dto.in.UsuarioDTORequest;
 import com.rafael.bffagendadortarefas.business.dto.out.EnderecoDTOResponse;
 import com.rafael.bffagendadortarefas.business.dto.out.TelefoneDTOResponse;
 import com.rafael.bffagendadortarefas.business.dto.out.UsuarioDTOResponse;
+import com.rafael.bffagendadortarefas.business.dto.out.ViaCepDTOResponse;
 import com.rafael.bffagendadortarefas.infrastructure.client.UsuarioClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class UsuarioService {
 
     private final UsuarioClient client;
 
+
+    // Post Methods
     public UsuarioDTOResponse salvaUsuario(UsuarioDTORequest usuarioDTO) {
         return client.salvaUsuario(usuarioDTO);
     }
@@ -25,12 +28,9 @@ public class UsuarioService {
         return client.login(loginDTORequest);
     }
 
+    // Get Methods
     public UsuarioDTOResponse buscaUsuarioPorEmail(String email, String token) {
         return client.buscaUsuarioPorEmail(email, token);
-    }
-
-    public void deletaUsuarioPorEmail(String email, String token) {
-        client.deletaUsuarioPorEmail(email, token);
     }
 
     // Metodos de Update
@@ -52,5 +52,16 @@ public class UsuarioService {
 
     public TelefoneDTOResponse cadastraTelefone(String token, TelefoneDTORequest dto) {
         return  client.cadastraTelefone(dto, token);
+    }
+
+    // Delete Methods
+    public void deletaUsuarioPorEmail(String email, String token) {
+        client.deletaUsuarioPorEmail(email, token);
+    }
+
+    // ViaCep Methods
+
+    public ViaCepDTOResponse buscarEnderecoPorCep(String cep){
+      return client.buscarDadosCep(cep);
     }
 }
