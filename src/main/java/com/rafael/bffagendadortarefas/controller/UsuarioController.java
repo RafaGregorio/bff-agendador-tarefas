@@ -8,6 +8,7 @@ import com.rafael.bffagendadortarefas.business.dto.in.UsuarioDTORequest;
 import com.rafael.bffagendadortarefas.business.dto.out.EnderecoDTOResponse;
 import com.rafael.bffagendadortarefas.business.dto.out.TelefoneDTOResponse;
 import com.rafael.bffagendadortarefas.business.dto.out.UsuarioDTOResponse;
+import com.rafael.bffagendadortarefas.business.dto.out.ViaCepDTOResponse;
 import com.rafael.bffagendadortarefas.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -122,16 +123,26 @@ public class UsuarioController {
     }
 
     // Delete Methods
+    @DeleteMapping("/{email}")
     @Operation(summary = "Deletar Usuários por Id", description = "Deleta usuário")
     @ApiResponse(responseCode = "200", description = "Usuário deletado com sucesso")
     @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro de servidor")
     @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
-    @DeleteMapping("/{email}")
-    public ResponseEntity<Void> deletaUsuarioPorEmail(@PathVariable String email,
+    public ResponseEntity<Void> deletaUsuarioPorEmail(@PathVariable("email") String email,
                                                       @RequestHeader(name = "Authorization", required = false)  String token){
         usuarioService.deletaUsuarioPorEmail(email, token);
         return ResponseEntity.ok().build();
     }
 
+    // ViaCep Methods
+
+    @GetMapping("/endereco/{cep}")
+    @Operation(summary = "Busca endereço pelo cep", description = "Busca dados de endereço recebendo um cep")
+    @ApiResponse(responseCode = "200", description = "Dados de endereço retornado com sucesso")
+    @ApiResponse(responseCode = "400", description = "Cep inválido")
+    @ApiResponse(responseCode = "500", description = "Erro de servidor")
+    public ResponseEntity<ViaCepDTOResponse> buscarEndereco(@PathVariable("cep") String cep) {
+        return ResponseEntity.ok(usuarioService.buscarEnderecoPorCep(cep));
+    }
 }
